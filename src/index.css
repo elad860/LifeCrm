@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Light mode only: neutralize the `dark:` variant so OS/browser dark-mode
+   preferences can never flip any styling, even if a `dark:` class is ever
+   added by mistake. */
+@custom-variant dark (&:where([data-force-dark-disabled]));
+
+@theme {
+  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  @apply bg-slate-50;
+}
+
+body {
+  margin: 0;
+  @apply font-sans text-slate-800 antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}
