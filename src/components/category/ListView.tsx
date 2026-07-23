@@ -1,6 +1,6 @@
 import type { Task } from '../../types'
 import { StatusBadge, UrgencyBadge } from '../ui/Badge'
-import { getContactsByIds } from '../../mockData'
+import { useData } from '../../context/DataContext'
 
 const urgencyRank = { high: 0, medium: 1, low: 2 } as const
 
@@ -10,6 +10,7 @@ interface ListViewProps {
 }
 
 export function ListView({ tasks, onOpenTask }: ListViewProps) {
+  const { getContactsByIds } = useData()
   const sorted = [...tasks].sort((a, b) => urgencyRank[a.urgency] - urgencyRank[b.urgency])
 
   return (

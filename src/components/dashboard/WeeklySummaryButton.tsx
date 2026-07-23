@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { CalendarRange } from 'lucide-react'
 import { Modal } from '../ui/Modal'
 import { StatusBadge, UrgencyBadge } from '../ui/Badge'
-import { categories, getTasksByCategory } from '../../mockData'
+import { useData } from '../../context/DataContext'
 
 function startOfWeek(date: Date): Date {
   const d = new Date(date)
@@ -18,6 +18,7 @@ function endOfWeek(date: Date): Date {
 }
 
 export function WeeklySummaryButton() {
+  const { categories, getTasksByCategory } = useData()
   const [open, setOpen] = useState(false)
 
   const { weekStart, weekEnd } = useMemo(() => {
@@ -38,7 +39,7 @@ export function WeeklySummaryButton() {
             .sort((a, b) => (a.eventDate! < b.eventDate! ? -1 : 1)),
         }))
         .filter((g) => g.tasks.length > 0),
-    [weekStartKey, weekEndKey],
+    [categories, getTasksByCategory, weekStartKey, weekEndKey],
   )
 
   const rangeLabel = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`

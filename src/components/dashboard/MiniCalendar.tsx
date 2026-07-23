@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChevronDown, ChevronLeft, ChevronRight, CalendarDays } from 'lucide-react'
 import { Card } from '../ui/Card'
-import { getCategory, tasks } from '../../mockData'
+import { useData } from '../../context/DataContext'
 
 const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
@@ -10,6 +10,7 @@ function toDateKey(d: Date): string {
 }
 
 export function MiniCalendar() {
+  const { tasks, getCategory } = useData()
   const [expanded, setExpanded] = useState(true)
   const [monthOffset, setMonthOffset] = useState(0)
 
@@ -30,7 +31,7 @@ export function MiniCalendar() {
       map.set(task.eventDate, list)
     }
     return map
-  }, [])
+  }, [tasks, getCategory])
 
   const gridDays = useMemo(() => {
     const year = viewDate.getFullYear()
@@ -51,7 +52,7 @@ export function MiniCalendar() {
         .filter((t) => t.eventDate && t.eventDate >= todayKey && t.status !== 'done')
         .sort((a, b) => (a.eventDate! < b.eventDate! ? -1 : 1))
         .slice(0, 5),
-    [todayKey],
+    [tasks, todayKey],
   )
 
   return (

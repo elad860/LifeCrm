@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
-import { categories, getTasksByCategory } from '../../mockData'
+import { useData } from '../../context/DataContext'
 import { getCategoryIcon } from '../../lib/icons'
 import { Card } from '../ui/Card'
 
 export function CategoryGrid() {
+  const { categories, getTasksByCategory } = useData()
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {categories.map((category) => {

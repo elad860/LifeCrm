@@ -1,7 +1,7 @@
 import { FileText, GripVertical } from 'lucide-react'
 import type { Task } from '../../types'
 import { UrgencyBadge } from '../ui/Badge'
-import { getContactsByIds } from '../../mockData'
+import { useData } from '../../context/DataContext'
 
 interface TaskCardProps {
   task: Task
@@ -11,6 +11,7 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task, onOpen, dragHandleProps, isDragging }: TaskCardProps) {
+  const { getContactsByIds } = useData()
   const contacts = getContactsByIds(task.contactIds)
   const isJobSearch = task.categoryId === 'job-search'
 

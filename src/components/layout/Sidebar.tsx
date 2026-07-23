@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import { LayoutGrid, Sparkles } from 'lucide-react'
-import { categories } from '../../mockData'
+import { useData } from '../../context/DataContext'
 import { getCategoryIcon } from '../../lib/icons'
 
 export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+  const { categories } = useData()
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex items-center gap-2 px-5 py-6">
